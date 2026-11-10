@@ -1,0 +1,3918 @@
+/*
+ * Author       : shreyakorishetter06
+ * Generated on : 10-Nov-2026 19:49:52
+ * Version      : 1.0
+ */
+ application "VisitorPass"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "UTC"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Appointment
+		{
+			success message = "Appointment Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Appointment_ID
+			(
+    			type = autonumber
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Visit_Type
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Pre-Scheduled","Walk-in","Recurring"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Visitor_Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Visitor_Phone
+			(
+    			type = phonenumber
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Visitor
+			(
+				type = picklist	
+				values  = Visitor.ID
+    			displayformat = [Visitor_Name.first_name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Host
+			(
+				type = picklist	
+				values  = Employee.ID
+    			displayformat = [Employee_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Department_Name
+			(
+				type = picklist	
+				displayname = "Department"
+				values  = Department.ID
+    			displayformat = [Department_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Purpose_Category
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Meeting","Interview","Delivery","Maintenance","Audit","Personal"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Purpose_Details
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Start_DateTime
+			(
+    			type = datetime
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			End_DateTime
+			(
+    			type = datetime
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Meeting_Room
+			(
+				type = picklist	
+				values  = Meeting_Room.ID
+    			displayformat = [Room_Code1]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Requires_Parking
+			(
+				type = checkboxes	
+				values = {"Yes","No","Yet to decide"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Requires_Hospitality
+			(
+				type = checkboxes	
+				values = {"Yes","No"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Requested","Approved","Rejected","Checked In","Checked Out","Cancelled","No Show"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Approval_Remarks
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Approved_On
+			(
+    			type = datetime
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Cancellation_Reason
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Visit_Duration_Mins
+			(
+				type = number
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Total_Visitors
+			(
+				type = number
+	 			row = 1
+	 			column = 1   
+				width = medium
+    			Formula_Properties
+    			(
+    						value =  input.Additional_Visitors.count() + 1
+    						visibility = false
+    			)
+			)
+			Host_Login_Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Reminder_Sent
+			(
+    			type = checkbox
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Additional_Visitors
+			(
+				type = grid
+				Full_Name
+				(
+    				type = text
+					width = medium
+				)
+				Phone_Number
+				(
+    				type = phonenumber
+					displayname = "Phone"
+					width = medium
+					personal data = true
+				)
+				Email
+				(
+    				type = email
+					maxchar = 80
+					width = medium
+					personal data = true
+				)
+				Company
+				(
+    				type = text
+					width = medium
+				)
+				Designation
+				(
+    				type = text
+					width = medium
+				)
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Items_Carried
+			(
+				type = grid
+				Item_Type
+				(
+					type = picklist
+					maxchar = 100
+					values = {"Laptop","Camera","Tools","Documents","Pen Drive","Other"}
+					width = medium
+				)
+				Item_Description
+				(
+    				type = text
+					width = medium
+				)
+				Brand_Model
+				(
+    				type = text
+					width = medium
+				)
+				Quantity
+				(
+					type = number
+					width = medium
+				)
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Vehicle_Details
+			(
+				type = grid
+				Vehicle_Type
+				(
+					type = picklist
+					displayname = "Vehicle_Type\\"
+					maxchar = 100
+					values = {"Car","Bike","Van","Truck"}
+					width = medium
+				)
+				Registration_Number
+				(
+    				type = text
+					width = medium
+				)
+				Make_Model
+				(
+    				type = text
+					width = medium
+				)
+				Driver_Name
+				(
+    				type = text
+					width = medium
+				)
+				Driver_Mobile
+				(
+    				type = phonenumber
+					width = medium
+					personal data = true
+				)
+				Parking_Slot
+				(
+    				type = text
+					width = medium
+				)
+				Entry_Time
+				(
+    				type = datetime
+					timedisplayoptions = "hh:mm:ss"
+					alloweddays = 0,1,2,3,4,5,6
+					width = medium
+				)
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Internal_Attendees
+			(
+				type = grid
+				Employee
+				(
+					type = picklist	
+					values  = Employee.ID
+    				displayformat = [Employee_ID]
+					sortorder = ascending
+					width = medium
+				)
+				Email
+				(
+    				type = email
+					maxchar = 80
+					width = medium
+					personal data = true
+				)
+				Role_In_Meeting
+				(
+					type = picklist
+					maxchar = 100
+					values = {"Organizer","Presenter","Participant","Observer"}
+					width = medium
+				)
+				Attendance_Status
+				(
+					type = picklist
+					maxchar = 100
+					values = {"Invited","Accepted","Declined","Attended"}
+					width = medium
+				)
+				Remarks
+				(
+    				type = text
+					width = medium
+				)
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Check_In_Out_Log
+		{
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Appointment
+			(
+				type = picklist	
+				values  = Appointment.ID
+    			displayformat = [Appointment_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Visitor_Pass
+			(
+				type = picklist	
+				values  = Visitor_Pass.ID
+    			displayformat = [Pass_No]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Gate
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Main Gate","East Gate","West Gate"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Check_In_Time
+			(
+    			type = datetime
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Check_Out_Time
+			(
+    			type = datetime
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Body_Temperature
+			(
+				type = decimal
+				displayname = " Body_Temperature"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Health_Declaration
+			(
+    			type = checkbox
+				displayname = "Health_Declaration "
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Belongings_Verified
+			(
+				type = checkboxes	
+				values = {"Verified","Not Verified"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Security_Officer
+			(
+    			type = picklist
+				module = users
+				displayformat = [username]
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Badge_Returned
+			(
+				type = checkboxes	
+				values = {"Yes","No"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Overstay_Alert_Sent
+			(
+    			type = checkbox
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Department
+		{
+			success message = "Department Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Department_Name
+			(
+    			type = text
+				displayname = "Department Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Department
+			(
+    			type = text
+				displayname = "Department Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Department_Head
+			(
+				type = picklist	
+				values  = Employee.ID
+    			displayformat = [Employee_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Floor
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Ground Floor","1st Floor","2nd Floor","3rd Floor","4th Floor","5th Floor","6th Floor"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Extension_Number
+			(
+				type = number
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Visitor_Allowed
+			(
+    			type = checkbox
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Active","Inactive"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Access_Zones
+			(
+				type = grid
+				Zone_Name
+				(
+    				type = text
+					width = medium
+				)
+				Floor
+				(
+					type = picklist
+					maxchar = 100
+					values = {"Ground Floor","1st Floor","2nd Floor","3rd Floor","4th Floor","5th Floor","6th Floor"}
+					width = medium
+				)
+				Security_Level
+				(
+					type = picklist
+					displayname = "Security Level"
+					maxchar = 100
+					values = {"Public","Restricted","High Security"}
+					width = medium
+				)
+				Escort_Required
+				(
+					type = checkboxes	
+					values = {"Yes","No"}
+					width = medium
+				)
+				Max_Visitors_At_Once
+				(
+					type = number
+					width = medium
+				)
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Employee
+		{
+			success message = "Employee Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Employee_ID
+			(
+    			type = autonumber
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Employee_Name
+			(
+    			type = name
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Mobile
+			(
+    			type = phonenumber
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Department_Name
+			(
+				type = picklist	
+				displayname = "Department"
+				values  = Department.ID
+    			displayformat = [Department_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Designation
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Profile_Photo
+			(
+    			type = image
+				source  = file
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Auto_Approve_Visitors
+			(
+    			type = checkbox
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Availability_Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Available","In Meeting","On Leave","Work From Home"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Active","Inactive"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Weekly_Availability
+			(
+				type = grid
+				Day
+				(
+					type = picklist
+					maxchar = 100
+					values = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"}
+					width = medium
+				)
+				Available
+				(
+					type = checkboxes	
+					values = {"Choice 1","Choice 2","Choice 3"}
+					width = medium
+				)
+				From_Time
+				(
+    				type = time
+					timedisplayoptions = "hh:mm:ss" 
+					width = medium
+				)
+				To_Time
+				(
+    				type = time
+					timedisplayoptions = "hh:mm:ss" 
+					width = medium
+				)
+				Max_Appointments
+				(
+					type = number
+					width = medium
+				)
+				Slot_Duration_MIns
+				(
+					type = number
+					width = medium
+				)
+				Notes
+				(
+    				type = text
+					width = medium
+				)
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Host_Approval
+		{
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Appointment
+			(
+				type = picklist	
+				values  = Appointment.ID
+    			displayformat = [Appointment_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Decision
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Approved","Rejected"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Remarks
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Meeting_Room
+		{
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Room_Name
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Room_Code1
+			(
+    			type = text
+				displayname = "Room_Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Room_Code
+			(
+				type = picklist
+				displayname = "Floor"
+				maxchar = 100
+				values = {"Ground Floor","1st Floor","2nd Floor","3rd Floor","4th Floor","5th Floor","6th Floor"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Capacity
+			(
+				type = number
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Facilities
+			(
+				type = list	
+				values = {"Projector","AC","Whiteboard","VC"}
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Room_Photo
+			(
+    			type = image
+				displayname = "Room_Photo "
+				source  = file
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Available","Occupied"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Booking_Approval_Needed
+			(
+    			type = checkbox
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Visitor
+		{
+			success message = "Visitor Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Visitor_ID
+			(
+				type = number
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Visitor_Name
+			(
+    			type = name
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Phone"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Company
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Designation
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Photo
+			(
+    			type = image
+				source  = file
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Visitor_Category
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Client","Vendor","Interviewee","Contractor","Delivery","Guest"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			ID_Proof_Type
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Aadhaar","Passport","Driving Licence","PAN","Company ID"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			ID_Proof_Number
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			ID_Proof_Upload
+			(
+    			type = upload file
+				browse = local_drive
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Address
+			(
+    			type = address
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Is_Blacklisted
+			(
+				type = checkboxes	
+				values = {"Yes","No"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Blacklist_Reason
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Total_Visits
+			(
+				type = number
+				initial value = 0
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Last_Visit_Date
+			(
+    			type = date
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			NDA_Signed
+			(
+    			type = checkbox
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Signature
+			(
+    			type = signature
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Visitor_Feedback
+		{
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Appointment
+			(
+				type = picklist	
+				values  = Appointment.ID
+    			displayformat = [Appointment_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Dropdown
+			(
+				type = picklist
+				displayname = "Drop Down"
+				maxchar = 100
+				values = {"Very Satisfied","Satisfied","Neutral","Dissatisfied","Very Dissatisfied"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Comments
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Would_Visit_Again
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Yes","No","Maybe"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Visitor_Pass
+		{
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Pass_No
+			(
+    			type = autonumber
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Appointment
+			(
+				type = picklist	
+				values  = Appointment.ID
+    			displayformat = [Appointment_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Visitor
+			(
+				type = picklist	
+				values  = Visitor.ID
+    			displayformat = [Visitor_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Pass_Type
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Single Day","Multi Day","Contractor","VIP"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Valid_From
+			(
+    			type = datetime
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Valid_Till
+			(
+    			type = datetime
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Pass_Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Active","Used","Expired","Revoked"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Issued_By
+			(
+    			type = picklist
+				module = users
+				displayformat = [username]
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			QR_Code
+			(
+    			type = image
+				source  = file
+				aspect ratio = original
+				camera = primary
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list All_Departments
+		{
+			displayName = "All Departments"
+			show all rows from Department    
+			(
+				Department_Name as "Department Name"
+				Department as "Department Code"
+				Floor
+				Extension_Number
+				Visitor_Allowed
+				Status
+				Access_Zones.Zone_Name as "Access_Zones"
+				Department_Head
+			)
+		}
+		default list All_Employees
+		{
+			displayName = "All Employees"
+			show all rows from Employee    
+			(
+				Employee_ID
+				Employee_Name 
+				Email
+				Mobile
+				(
+					displayformat = plainnumber 
+				)
+				Department_Name as "Department"
+				Designation
+				Profile_Photo
+				Auto_Approve_Visitors
+				Availability_Status
+				Status
+				Weekly_Availability.Day as "Weekly_Availability"
+			)
+		}
+		default list Meeting_Room_Report
+		{
+			displayName = "Meeting_Room Report"
+			show all rows from Meeting_Room    
+			(
+				Room_Name
+				Room_Code1 as "Room_Code"
+				Room_Code as "Floor"
+				Capacity
+				Facilities
+				Room_Photo as "Room_Photo "
+				Status
+				Booking_Approval_Needed
+			)
+		}
+		default list All_Visitors
+		{
+			displayName = "All Visitors"
+			show all rows from Visitor    
+			(
+				Visitor_ID
+				Visitor_Name 
+				Email
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+				)
+				Company
+				Designation
+				Photo
+				Visitor_Category
+				ID_Proof_Type
+				ID_Proof_Number
+				ID_Proof_Upload
+				Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Is_Blacklisted
+				Blacklist_Reason
+				Total_Visits
+				Last_Visit_Date
+				NDA_Signed
+				Signature
+			)
+		}
+		default list All_Appointments
+		{
+			displayName = "All Appointments"
+			show all rows from Appointment    
+			(
+				Appointment_ID
+				Visit_Type
+				Visitor
+				Host
+				Purpose_Category
+				Purpose_Details
+				Start_DateTime
+				End_DateTime
+				Meeting_Room
+				Requires_Parking
+				Requires_Hospitality
+				Status
+				Approval_Remarks
+				Approved_On
+				Cancellation_Reason
+				Visit_Duration_Mins
+				Additional_Visitors.Full_Name as "Additional_Visitors"
+				Total_Visitors
+				Items_Carried.Item_Type as "Items_Carried"
+				Vehicle_Details.Vehicle_Type as "Vehicle_Details"
+				Internal_Attendees.Employee as "Internal_Attendees"
+				Visitor_Email
+				Visitor_Phone
+				(
+					displayformat = plainnumber 
+				)
+				Department_Name as "Department"
+			)
+		}
+		default list Visitor_Pass_Report
+		{
+			displayName = "Visitor_Pass Report"
+			show all rows from Visitor_Pass    
+			(
+				Pass_No
+				Appointment
+				Visitor
+				Pass_Type
+				Valid_From
+				Valid_Till
+				Pass_Status
+				Issued_By
+			)
+		}
+		default list Check_In_Out_Log_Report
+		{
+			displayName = "Check_In_Out_Log Report"
+			show all rows from Check_In_Out_Log    
+			(
+				Appointment
+				Visitor_Pass
+				Gate
+				Check_In_Time
+				Check_Out_Time
+				Body_Temperature as " Body_Temperature"
+				Health_Declaration as "Health_Declaration "
+				Belongings_Verified
+				Security_Officer
+				Badge_Returned
+			)
+		}
+		default list Visitor_Feedback_Report
+		{
+			displayName = "Visitor_Feedback Report"
+			show all rows from Visitor_Feedback    
+			(
+				Appointment
+				Dropdown as "Drop Down"
+				Comments
+				Would_Visit_Again
+			)
+		}
+		default list Host_Approval_Report
+		{
+			displayName = "Host_Approval Report"
+			show all rows from Host_Approval    
+			(
+				Appointment
+				Decision
+				Remarks
+			)
+		}
+		list Todays_Appointments
+		{
+			displayName = "Todays_Appointments"
+			show all rows from Appointment  [Start_DateTime == '01-Nov-2026 21:00:00']  
+			(
+				Appointment_ID
+				Visit_Type
+				Visitor_Email
+				Visitor_Phone
+				(
+					displayformat = plainnumber 
+				)
+				Visitor
+				Host
+				Department_Name as "Department"
+				Purpose_Category
+				Purpose_Details
+				Start_DateTime
+				End_DateTime
+				Meeting_Room
+				Requires_Parking
+				Requires_Hospitality
+				Status
+				Approval_Remarks
+				Approved_On
+				Cancellation_Reason
+				Visit_Duration_Mins
+				Total_Visitors
+			)
+		}
+		summary Appointments_By_Date
+		{
+			displayName = "Appointments_By_Date"
+			show all rows from Appointment    
+			(
+				Start_DateTime
+				(
+					displayformat = fulldate
+				)
+			)
+			options
+			(
+				display rows = 10
+				display records per row = 3
+			)
+		}
+	}
+	pages
+	{
+		page VisitorPass_Dashboard
+		{
+			displayname = "VisitorPass_Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'All_Appointments'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<chart \n\telementName='Chart'\n\n\ttype = 'Bar'\n\txtitle = 'Appointment Status'\n\tytitle = 'Number of Appointments'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Appointment'\n\txfield = 'Status'\n\tyfields = 'count:ID'\n\tshowDataLabel = 'true'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report 1'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'Visitor_Pass_Report'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+		 functions
+		 {
+			 Deluge
+			 {
+				 void visitorpass.attachQRImage(int passID)
+                 {
+                 	// Fetch the Visitor_Pass record using the provided passID
+                 	passRecord = Visitor_Pass[ID == passID];
+                 	// Check if record exists
+                 	if(passRecord.count() > 0)
+                 	{
+                 		// Get the Pass_No from the record
+                 		passNo = passRecord.Pass_No;
+                 		// Construct the QR code URL
+                 		qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&format=png&data=" + passNo;
+                 		// Invoke the URL to fetch the QR code image
+                 		qrImage = invokeurl
+                 		[
+                 			url :qrUrl
+                 			type :GET
+                 		];
+                 		// Store the image in the QR_Code field of the record
+                 		passRecord.QR_Code=qrImage;
+                 	}
+                 	else
+                 	{
+                 		info "Visitor Pass record not found for ID: " + passID;
+                 	}
+                 }
+			 }
+		 }
+
+
+		workflow
+		{
+		form
+		{
+			Appointment_Fill_Visitor_ as "Appointment_Fill_Visitor_Details"
+			{
+				type =  form
+				form = Appointment
+
+				record event = on add or edit
+
+				on user input of Visitor
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Visitor != null)
+										{
+											v = Visitor[ID == input.Visitor];
+											if(v != null)
+											{
+												input.Visitor_Email = v.Email;
+												input.Visitor_Phone = v.Phone_Number;
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Appointment_Fill_Departme as "Appointment_Fill_Department"
+			{
+				type =  form
+				form = Appointment
+
+				record event = on add or edit
+
+				on user input of Host
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Host != null)
+										{
+											emp = Employee[ID == input.Host];
+											if(emp != null)
+											{
+												input.Department_Name = emp.Department_Name;
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Appointment_Validate as "Appointment_Validate"
+			{
+				type =  form
+				form = Appointment
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Start_DateTime != null && input.Start_DateTime < zoho.currenttime)
+										{
+											alert "Start time cannot be in the past.";
+											cancel submit;
+										}
+										if(input.Start_DateTime != null && input.End_DateTime != null)
+										{
+											if(input.End_DateTime <= input.Start_DateTime)
+											{
+												alert "End time must be after start time.";
+												cancel submit;
+											}
+										}
+										if(input.Meeting_Room != null && input.Start_DateTime != null && input.End_DateTime != null)
+										{
+											clash = Appointment[Meeting_Room == input.Meeting_Room && ID != input.ID && Status != "Cancelled" && Status != "Rejected" && Start_DateTime < input.End_DateTime && End_DateTime > input.Start_DateTime];
+											if(clash.count() > 0)
+											{
+												alert "Meeting room is already booked for this slot.";
+												cancel submit;
+											}
+										}
+										if(input.Host != null && input.Start_DateTime != null && input.End_DateTime != null)
+										{
+											hostClash = Appointment[Host == input.Host && ID != input.ID && Status != "Cancelled" && Status != "Rejected" && Status != "No Show" && Status != "Checked Out" && Start_DateTime < input.End_DateTime && End_DateTime > input.Start_DateTime];
+											if(hostClash.count() > 0)
+											{
+												alert "Host already has an appointment in this slot.";
+												cancel submit;
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Appointment_Approval_Noti as "Appointment_Approval_Notification"
+			{
+				type =  form
+				form = Appointment
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											host = Employee[ID == input.Host];
+										if(host != null)
+										{
+											if(host.Auto_Approve_Visitors == true)
+											{
+												input.Status = "Approved";
+											}
+											else
+											{
+												input.Status = "Requested";
+												sendmail
+												[
+													from :"shreyakorishetter06@gmail.com"
+													to :host.Email
+													subject :"Approval needed for visitor appointment"
+													message :"Hello " + host.Employee_Name + ",<br><br>A visitor appointment requires your approval.<br><br>Appointment ID: " + input.Appointment_ID + "<br>Start time: " + input.Start_DateTime + "<br>Purpose: " + input.Purpose_Category + "<br><br>Please review the request in the Visitor Management System."
+												]
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Send_Approval_Notificatio as "Send_Approval_Notification"
+			{
+				type =  form
+				form = Appointment
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											visitorRecord = Visitor[ID == input.Visitor];
+										if(visitorRecord != null)
+										{
+											if(input.Status == "Approved")
+											{
+												sendmail
+												[
+													from :"shreyakorishetter06@gmail.com"
+													to :visitorRecord.Email
+													subject :"Your visitor appointment is approved"
+													message :"Hello " + visitorRecord.Visitor_Name + ",<br><br>Your visitor appointment has been approved.<br><br>Appointment ID: " + input.Appointment_ID + "<br>Start time: " + input.Start_DateTime + "<br><br>Please arrive at the scheduled time."
+												]
+											}
+											else if(input.Status == "Rejected")
+											{
+												sendmail
+												[
+													from :"shreyakorishetter06@gmail.com"
+													to :visitorRecord.Email
+													subject :"Update on your visitor appointment"
+													message :"Hello " + visitorRecord.Visitor_Name + ",<br><br>Unfortunately, your visitor appointment has been rejected.<br><br>Appointment ID: " + input.Appointment_ID + "<br><br>Please contact the host or administrator if you need further information."
+												]
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Host_Approval_Update_Stat as "Host_Approval_Update_Status"
+			{
+				type =  form
+				form = Host_Approval
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											appointmentRecord = Appointment[ID == input.Appointment];
+										if(appointmentRecord != null)
+										{
+											if(input.Decision == "Approved")
+											{
+												appointmentRecord.Status="Approved";
+												appointmentRecord.Approval_Remarks=input.Remarks;
+												appointmentRecord.Approved_On=zoho.currenttime;
+												existingPass = Visitor_Pass[Appointment == appointmentRecord.ID];
+												if(existingPass.count() == 0)
+												{
+													insert into Visitor_Pass
+													[
+														Appointment=appointmentRecord.ID
+														Visitor=appointmentRecord.Visitor
+														Pass_Type="One-Time Visit"
+														Valid_From=appointmentRecord.Start_DateTime
+														Valid_Till=appointmentRecord.End_DateTime
+														Pass_Status="Active"
+														Added_User=zoho.loginuser
+													]
+												}
+												visitorRecord = Visitor[ID == appointmentRecord.Visitor];
+												if(visitorRecord != null)
+												{
+													sendmail
+													[
+														from :"shreyakorishetter06@gmail.com"
+														to :visitorRecord.Email
+														subject :"Your visitor appointment is approved"
+														message :"Hello " + visitorRecord.Visitor_Name + ",<br><br>Your appointment has been approved by the host.<br><br>Appointment ID: " + appointmentRecord.Appointment_ID + "<br>Start time: " + appointmentRecord.Start_DateTime
+													]
+												}
+											}
+											else if(input.Decision == "Rejected")
+											{
+												appointmentRecord.Status="Rejected";
+												visitorRecord = Visitor[ID == appointmentRecord.Visitor];
+												if(visitorRecord != null)
+												{
+													sendmail
+													[
+														from :"shreyakorishetter06@gmail.com"
+														to :visitorRecord.Email
+														subject :"Your visitor appointment was rejected"
+														message :"Hello " + visitorRecord.Visitor_Name + ",<br><br>Your appointment has been rejected by the host.<br><br>Appointment ID: " + appointmentRecord.Appointment_ID + "<br><br>Please contact the host or administrator for further information."
+													]
+												}
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Host_Approval_Update_Appo as "Host_Approval_Update_Appointment"
+			{
+				type =  form
+				form = Host_Approval
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Appointment != null)
+										{
+											appointmentRecord = Appointment[ID == input.Appointment];
+											if(appointmentRecord != null)
+											{
+												if(input.Decision == "Approved")
+												{
+													appointmentRecord.Status="Approved";
+													appointmentRecord.Approval_Remarks=input.Remarks;
+													appointmentRecord.Approved_On=zoho.currenttime;
+												}
+												else if(input.Decision == "Rejected")
+												{
+													appointmentRecord.Status="Rejected";
+													appointmentRecord.Approval_Remarks=input.Remarks;
+												}
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Check_In_Time_Update_ as "Check_In_Time_Update."
+			{
+				type =  form
+				form = Check_In_Out_Log
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Check_In_Time == null)
+										{
+											input.Check_In_Time = zoho.currenttime;
+										}
+						)
+					}
+				}
+
+			}
+			Check_Out_Time_Update as "Check_Out_Time_Update"
+			{
+				type =  form
+				form = Check_In_Out_Log
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Check_Out_Time == null && input.Check_In_Time != null)
+										{
+											input.Check_Out_Time = zoho.currenttime;
+										}
+						)
+					}
+				}
+
+			}
+			Generate_Visitor_Pass as "Generate_Visitor_Pass"
+			{
+				type =  form
+				form = Appointment
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Status == "Approved")
+										{
+											existingPass = Visitor_Pass[Appointment == input.ID];
+											if(existingPass.count() == 0)
+											{
+												insert into Visitor_Pass
+												[
+													Appointment=input.ID
+													Visitor=input.Visitor
+													Pass_Type="One-Time Visit"
+													Valid_From=input.Start_DateTime
+													Valid_Till=input.End_DateTime
+													Pass_Status="Active"
+													Added_User=zoho.loginuser
+												]
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Send_SMS_On_Approval as "Send_SMS_On_Approval"
+			{
+				type =  form
+				form = Appointment
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Fetch the visitor record linked to the approved appointment
+										visitorRecord = Visitor[ID == input.Visitor.ID];
+										// Validate visitor phone number exists
+										if(visitorRecord.Phone_Number != null && visitorRecord.Phone_Number != "")
+										{
+											visitorPhone = visitorRecord.Phone_Number;
+											visitorName = visitorRecord.Visitor_Name.first_name;
+											appointmentID = input.Appointment_ID;
+											meetingRoom = input.Meeting_Room.Room_Name;
+											// Construct the SMS message
+											smsMessage = "Dear " + visitorName + ", your appointment (ID: " + appointmentID + ") has been approved. Please visit " + meetingRoom + " for your meeting.";
+											// TODO: Create a connection for Twilio/SMS service and replace "your_sms_connection" below
+											// Example: twilio.sms.send("your_sms_connection", visitorPhone, smsMessage);
+											// Since no connection is available in context, this task requires a connection setup
+											info "SMS would be sent to " + visitorPhone + ": " + smsMessage;
+										}
+										else
+										{
+											info "Visitor phone number is missing. Cannot send SMS.";
+										}
+						)
+					}
+				}
+
+			}
+			Send_QR_Code_Email_on_Approval as "Send QR Code Email on Approval"
+			{
+				type =  form
+				form = Appointment
+
+				record event = on edit
+
+				on update of Status
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Fetch the Appointment record based on the current input ID
+										appointmentRecord = Appointment[ID == input.ID];
+										// Check if the status is 'Approved'
+										if(input.Status == "Approved")
+										{
+											// Fetch the Visitor record linked to this appointment
+											visitorRecord = Visitor[ID == appointmentRecord.Visitor.ID];
+											// Fetch the Meeting Room record linked to this appointment
+											meetingRoomRecord = Meeting_Room[ID == appointmentRecord.Meeting_Room.ID];
+											// Fetch the Host record linked to this appointment
+											hostRecord = Employee[ID == appointmentRecord.Host.ID];
+											// Fetch the Visitor Pass record to get the QR Code
+											passRecord = Visitor_Pass[Appointment.ID == appointmentRecord.ID];
+											// Construct the email message
+											emailMessage = "<h2>Appointment Approved</h2>";
+											emailMessage = emailMessage + "<p>Dear " + visitorRecord.Visitor_Name.first_name + " " + visitorRecord.Visitor_Name.last_name + ",</p>";
+											emailMessage = emailMessage + "<p>Your appointment has been approved.</p>";
+											emailMessage = emailMessage + "<p><strong>Details:</strong></p>";
+											emailMessage = emailMessage + "<ul>";
+											emailMessage = emailMessage + "<li><strong>Host:</strong> " + hostRecord.Employee_Name.first_name + " " + hostRecord.Employee_Name.last_name + "</li>";
+											emailMessage = emailMessage + "<li><strong>Meeting Room:</strong> " + meetingRoomRecord.Room_Name + "</li>";
+											emailMessage = emailMessage + "<li><strong>Date & Time:</strong> " + appointmentRecord.Start_DateTime + "</li>";
+											emailMessage = emailMessage + "<li><strong>Purpose:</strong> " + appointmentRecord.Purpose_Details + "</li>";
+											emailMessage = emailMessage + "</ul>";
+											emailMessage = emailMessage + "<p>Please find your Visitor Pass QR Code attached.</p>";
+											// Send the email with the QR Code attachment
+											sendmail
+											[
+												from :zoho.adminuserid
+												to :input.Visitor_Email
+												subject :"Appointment Approved - " + appointmentRecord.Appointment_ID
+												message :emailMessage
+												content type :HTML
+												Attachments :file:passRecord.QR_Code
+											]
+										}
+						)
+					}
+				}
+
+			}
+		}
+
+
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Receptionist_Access"
+			{
+				name = "Receptionist_Access"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:false, PIIAccess:false, ePHIAccess:false}
+				description = "Allows receptionists to manage visitor registration and check-in/check-out.\n"
+				ModulePermissions
+				{
+					Appointment
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Appointments={"View"}
+						}
+					}
+					Department
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Departments={"View"}
+						}
+					}
+					Host_Approval
+					{
+						allFieldsVisible= true 
+					}
+					Employee
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Employees={"View"}
+						}
+					}
+					Visitor
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Visitors={"View","Edit"}
+						}
+					}
+					Check_In_Out_Log
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Check_In_Out_Log_Report={"View","Edit"}
+						}
+					}
+					Visitor_Feedback
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Visitor_Feedback_Report={"View"}
+						}
+					}
+					Visitor_Pass
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Visitor_Pass_Report={"View"}
+						}
+					}
+					Meeting_Room
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Meeting_Room_Report={"View"}
+						}
+					}
+				}
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Host_Access"
+			{
+				name = "Host_Access"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Allows hosts to view appointments and submit approval decisions\n"
+				ModulePermissions
+				{
+					Appointment
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Appointments={"View"}
+						}
+					}
+					Department
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Departments={"View"}
+						}
+					}
+					Host_Approval
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Host_Approval_Report={"View","Edit"}
+						}
+					}
+					Employee
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Employees={"View"}
+						}
+					}
+					Visitor
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Visitors={"View"}
+						}
+					}
+					Check_In_Out_Log
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Check_In_Out_Log_Report={"View"}
+						}
+					}
+					Visitor_Feedback
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Visitor_Feedback_Report={"View"}
+						}
+					}
+					Visitor_Pass
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Visitor_Pass_Report={"View"}
+						}
+					}
+					Meeting_Room
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Meeting_Room_Report={"View"}
+						}
+					}
+					VisitorPass_Dashboard
+					{
+						enabled = tab
+					}
+				}
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+					"Host"
+					{
+						description = "Reviews visitor appointment requests and approves or rejects them."
+					}
+					"Receptionist"
+					{
+						description = "Registers visitors and manages visitor check-in and check-out."
+					}
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "VIS"
+			background color = "theme"
+			foreground color = "#ffffff"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form Appointment
+			{
+				label placement = left
+			}
+			form Check_In_Out_Log
+			{
+				label placement = left
+			}
+			form Department
+			{
+				label placement = left
+			}
+			form Employee
+			{
+				label placement = left
+			}
+			form Host_Approval
+			{
+				label placement = left
+			}
+			form Meeting_Room
+			{
+				label placement = left
+			}
+			form Visitor
+			{
+				label placement = left
+			}
+			form Visitor_Feedback
+			{
+				label placement = left
+			}
+			form Visitor_Pass
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report All_Departments
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Department_Name as "Department Name"
+								Department as "Department Code"
+								Floor
+								Extension_Number
+								Visitor_Allowed
+								Status
+								Access_Zones.Zone_Name as "Access_Zones"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Department_Name as "Department Name"
+								Department as "Department Code"
+								Floor
+								Extension_Number
+								Visitor_Allowed
+								Status
+								Access_Zones.Zone_Name as "Access_Zones"
+								Department_Head
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Employees
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Employee_ID
+								Employee_Name
+								Email
+								Mobile
+								Department_Name as "Department"
+								Designation
+								Profile_Photo
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Employee_ID
+								Employee_Name
+								Email
+								Mobile
+								Department_Name as "Department"
+								Designation
+								Profile_Photo
+								Auto_Approve_Visitors
+								Availability_Status
+								Status
+								Weekly_Availability.Day as "Weekly_Availability"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Meeting_Room_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Room_Name
+								Room_Code1 as "Room_Code"
+								Room_Code as "Floor"
+								Capacity
+								Facilities
+								Room_Photo as "Room_Photo "
+								Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Room_Name
+								Room_Code1 as "Room_Code"
+								Room_Code as "Floor"
+								Capacity
+								Facilities
+								Room_Photo as "Room_Photo "
+								Status
+								Booking_Approval_Needed
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Visitors
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Visitor_ID
+								Visitor_Name
+								Email
+								Phone_Number as "Phone"
+								Company
+								Designation
+								Photo
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Visitor_ID
+								Visitor_Name
+								Email
+								Phone_Number as "Phone"
+								Company
+								Designation
+								Photo
+								Visitor_Category
+								ID_Proof_Type
+								ID_Proof_Number
+								ID_Proof_Upload
+								Address
+								Is_Blacklisted
+								Blacklist_Reason
+								Total_Visits
+								Last_Visit_Date
+								NDA_Signed
+								Signature
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Appointments
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Appointment_ID
+								Visit_Type
+								Visitor
+								Host
+								Purpose_Category
+								Purpose_Details
+								Start_DateTime
+								Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Appointment_ID
+								Visit_Type
+								Visitor
+								Host
+								Purpose_Category
+								Purpose_Details
+								Start_DateTime
+								End_DateTime
+								Meeting_Room
+								Requires_Parking
+								Requires_Hospitality
+								Status
+								Approval_Remarks
+								Approved_On
+								Cancellation_Reason
+								Visit_Duration_Mins
+								Additional_Visitors.Full_Name as "Additional_Visitors"
+								Total_Visitors
+								Items_Carried.Item_Type as "Items_Carried"
+								Vehicle_Details.Vehicle_Type as "Vehicle_Details"
+								Internal_Attendees.Employee as "Internal_Attendees"
+								Visitor_Email
+								Visitor_Phone
+								Department_Name as "Department"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Visitor_Pass_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Pass_No
+								Appointment
+								Visitor
+								Pass_Type
+								Valid_From
+								Valid_Till
+								Pass_Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Pass_No
+								Appointment
+								Visitor
+								Pass_Type
+								Valid_From
+								Valid_Till
+								Pass_Status
+								Issued_By
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Check_In_Out_Log_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Appointment
+								Visitor_Pass
+								Gate
+								Check_In_Time
+								Check_Out_Time
+								Body_Temperature as " Body_Temperature"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Appointment
+								Visitor_Pass
+								Gate
+								Check_In_Time
+								Check_Out_Time
+								Body_Temperature as " Body_Temperature"
+								Health_Declaration as "Health_Declaration "
+								Belongings_Verified
+								Security_Officer
+								Badge_Returned
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Visitor_Feedback_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Appointment
+								Dropdown as "Drop Down"
+								Comments
+								Would_Visit_Again
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Appointment
+								Dropdown as "Drop Down"
+								Comments
+								Would_Visit_Again
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Host_Approval_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Appointment
+								Decision
+								Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Appointment
+								Decision
+								Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Todays_Appointments
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Appointment_ID
+								Visit_Type
+								Visitor_Email
+								Visitor_Phone
+								Visitor
+								Host
+								Department_Name as "Department"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Appointment_ID
+								Visit_Type
+								Visitor_Email
+								Visitor_Phone
+								Visitor
+								Host
+								Department_Name as "Department"
+								Purpose_Category
+								Purpose_Details
+								Start_DateTime
+								End_DateTime
+								Meeting_Room
+								Requires_Parking
+								Requires_Hospitality
+								Status
+								Approval_Remarks
+								Approved_On
+								Cancellation_Reason
+								Visit_Duration_Mins
+								Total_Visitors
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Appointments_By_Date
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -2
+	     				recordsperrow = 3
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Start_DateTime
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						record
+						(
+							View Record   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						appointment_count_datablock
+						(
+		     				title = "Appointment Count by Date"
+							fields
+							(
+								Start_DateTime
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			unused
+			{
+				report Appointments_By_Date
+				{
+					icon = "tech-desktop"
+				}
+			}
+			space Space
+			{
+				displayname = "space"
+				icon = "tech-desktop"
+
+				section Home
+				{
+					displayname = "Home"
+					icon = "ui-1-home-minimal"
+				}
+				section All_Orders
+				{
+					displayname = "All Orders"
+					icon = "ui-3-playlist"
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = connection
+						displayname = "Connection"
+						icon = "tech-2-device-connection"
+					}
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Task"
+						icon = "design-todo"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Task"
+						icon = "ui-2-hourglass"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Departments
+				{
+					displayname = "Departments"
+					icon = "business-hierarchy-53"
+					form  Department
+					{
+						icon = "furniture-cabinet"
+					}
+					report All_Departments
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Employees
+				{
+					displayname = "Employees"
+					icon = "users-single-04"
+					form  Employee
+					{
+						icon = "business-business-contact-89"
+					}
+					report All_Employees
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Meeting_Room
+				{
+					displayname = "Meeting_Room"
+					icon = "tech-desktop"
+					form  Meeting_Room
+					{
+						icon = "tech-desktop"
+					}
+					report Meeting_Room_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Visitors
+				{
+					displayname = "Visitors"
+					icon = "users-single-02"
+					form  Visitor
+					{
+						icon = "users-single-02"
+					}
+					report All_Visitors
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Appointments
+				{
+					displayname = "Appointments"
+					icon = "ui-1-calendar-grid-61"
+					form  Appointment
+					{
+						icon = "location-appointment"
+					}
+					report All_Appointments
+					{
+						icon = "tech-desktop"
+					}
+					report Todays_Appointments
+					{
+						icon = "location-appointment"
+					}
+				}
+				section Visitor_Pass
+				{
+					displayname = "Visitor_Pass"
+					icon = "tech-desktop"
+					form  Visitor_Pass
+					{
+						icon = "tech-desktop"
+					}
+					report Visitor_Pass_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Check_In_Out_Log
+				{
+					displayname = "Check_In_Out_Log"
+					icon = "tech-desktop"
+					form  Check_In_Out_Log
+					{
+						icon = "tech-desktop"
+					}
+					report Check_In_Out_Log_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Visitor_Feedback
+				{
+					displayname = "Visitor_Feedback"
+					icon = "tech-desktop"
+					form  Visitor_Feedback
+					{
+						icon = "tech-desktop"
+					}
+					report Visitor_Feedback_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Host_Approval
+				{
+					displayname = "Host_Approval"
+					icon = "tech-desktop"
+					form  Host_Approval
+					{
+						icon = "tech-desktop"
+					}
+					report Host_Approval_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section VisitorPass_Dashboard
+				{
+					displayname = "VisitorPass_Dashboard"
+					icon = "tech-desktop"
+					page VisitorPass_Dashboard
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+					show = {section,component}
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Appointment
+			{
+				label placement = auto
+			}
+			form Check_In_Out_Log
+			{
+				label placement = auto
+			}
+			form Department
+			{
+				label placement = auto
+			}
+			form Employee
+			{
+				label placement = auto
+			}
+			form Host_Approval
+			{
+				label placement = auto
+			}
+			form Meeting_Room
+			{
+				label placement = auto
+			}
+			form Visitor
+			{
+				label placement = auto
+			}
+			form Visitor_Feedback
+			{
+				label placement = auto
+			}
+			form Visitor_Pass
+			{
+				label placement = auto
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "space"
+				icon = "tech-desktop"
+
+				section Orders_Dashboard
+				{
+					displayname = "Orders Dashboard"
+					icon = "design-align-left"
+					page VisitorPass_Dashboard
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section All_Orders
+				{
+					displayname = "All Orders"
+					icon = "tech-desktop"
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = connection
+						displayname = "Connection"
+						icon = "tech-2-device-connection"
+					}
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Task"
+						icon = "design-todo"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Task"
+						icon = "ui-2-hourglass"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Departments
+				{
+					displayname = "Departments"
+					icon = "business-hierarchy-53"
+					form  Department
+					{
+						icon = "furniture-cabinet"
+					}
+					report All_Departments
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Employees
+				{
+					displayname = "Employees"
+					icon = "users-single-04"
+					form  Employee
+					{
+						icon = "business-business-contact-89"
+					}
+					report All_Employees
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Meeting_Room
+				{
+					displayname = "Meeting_Room"
+					icon = "tech-desktop"
+					form  Meeting_Room
+					{
+						icon = "tech-desktop"
+					}
+					report Meeting_Room_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Visitors
+				{
+					displayname = "Visitors"
+					icon = "users-single-02"
+					form  Visitor
+					{
+						icon = "users-single-02"
+					}
+					report All_Visitors
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Appointments
+				{
+					displayname = "Appointments"
+					icon = "ui-1-calendar-grid-61"
+					form  Appointment
+					{
+						icon = "location-appointment"
+					}
+					report All_Appointments
+					{
+						icon = "tech-desktop"
+					}
+					report Todays_Appointments
+					{
+						icon = "location-appointment"
+					}
+					report Appointments_By_Date
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Visitor_Pass
+				{
+					displayname = "Visitor_Pass"
+					icon = "tech-desktop"
+					form  Visitor_Pass
+					{
+						icon = "tech-desktop"
+					}
+					report Visitor_Pass_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Check_In_Out_Log
+				{
+					displayname = "Check_In_Out_Log"
+					icon = "tech-desktop"
+					form  Check_In_Out_Log
+					{
+						icon = "tech-desktop"
+					}
+					report Check_In_Out_Log_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Visitor_Feedback
+				{
+					displayname = "Visitor_Feedback"
+					icon = "tech-desktop"
+					form  Visitor_Feedback
+					{
+						icon = "tech-desktop"
+					}
+					report Visitor_Feedback_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Host_Approval
+				{
+					displayname = "Host_Approval"
+					icon = "tech-desktop"
+					form  Host_Approval
+					{
+						icon = "tech-desktop"
+					}
+					report Host_Approval_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+					show = {component}
+				}
+			}
+		}
+		customize
+		{
+			layout = onecolumn
+			font = "default"
+			style = "1"
+			color options
+			{
+				color = darkgrey
+			}
+			logo
+			{
+				preference = "app_icon"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Appointment
+			{
+				label placement = auto
+			}
+			form Check_In_Out_Log
+			{
+				label placement = auto
+			}
+			form Department
+			{
+				label placement = auto
+			}
+			form Employee
+			{
+				label placement = auto
+			}
+			form Host_Approval
+			{
+				label placement = auto
+			}
+			form Meeting_Room
+			{
+				label placement = auto
+			}
+			form Visitor
+			{
+				label placement = auto
+			}
+			form Visitor_Feedback
+			{
+				label placement = auto
+			}
+			form Visitor_Pass
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "1"
+			color options
+			{
+				color = darkgrey
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
